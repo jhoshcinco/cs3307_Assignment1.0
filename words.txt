@@ -1,0 +1,10 @@
+apple
+brain
+chair
+drink
+earth
+fruit
+glass
+heart
+index
+juice
