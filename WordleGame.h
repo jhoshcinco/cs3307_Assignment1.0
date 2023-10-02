@@ -8,8 +8,6 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
-#include <fstream>
-
 
 
 class WordleGame : public Wt::WApplication {
@@ -27,6 +25,7 @@ private:
 
     void loadWordList(const std::string& filename);
     std::string randomSecretWord();
+    void restartGame();
     void checkGuess();
     void endGame(bool won);
 };

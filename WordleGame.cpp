@@ -4,11 +4,11 @@
 
 WordleGame::WordleGame(const Wt::WEnvironment& env):
     Wt::WApplication(env),
-    secretWord_("apple"),
+    secretWord_(),
     attempts_(0) {
-    loadWordList("C:\\Users\\Jhosh\\CLionProjects\\cs3307_Assignment1.0\\words.txt");
-//    secretWord_= randomSecretWord();
+    wordList_={"apple","brain","chair","drink","earth","fruit","glass","heart","index","juice"};
     setTitle("Wordle Game");
+    secretWord_ = randomSecretWord();
 
 
 
@@ -20,19 +20,6 @@ WordleGame::WordleGame(const Wt::WEnvironment& env):
     submitBtn_->clicked().connect(this, &WordleGame::checkGuess);
 }
 
-void WordleGame::loadWordList(const std::string &filename) {
-    std::ifstream file(filename);
-    if(!file.is_open()) {
-        std::cerr << "Error opening file " << filename << std::endl;
-        return;
-    }
-    std::string word;
-    while(std::getline(file, word)) {
-        wordList_.push_back(word);
-    }
-    std :: cout << wordList_.size() << std::endl;
-    file.close();
-}
 
 std::string WordleGame::randomSecretWord() {
     if (wordList_.empty()){
@@ -61,7 +48,6 @@ void WordleGame::checkGuess() {
         return;
     }
     attempts_++;
-//    guessResults(guess);
     std::string result;
     for (size_t i = 0; i < secretWord_.length(); ++i) {
         auto letterText = resultContainer->addWidget(std::make_unique<Wt::WText>(std::string(1,guess[i])));
@@ -98,6 +84,17 @@ void WordleGame::endGame(bool won) {
     } else {
         statusText_->setText("Sorry! The correct word was: " + secretWord_);
     }
+    submitBtn_->setText("Restart Game");
+    submitBtn_->enable();
+    submitBtn_->clicked().connect(this, &WordleGame::restartGame);
 
-
+}
+void WordleGame::restartGame(){
+    submitBtn_->setText("Submit Guess");
+    secretWord_ = randomSecretWord();
+    attempts_ = 0;
+    resultsContainer_->clear();
+    statusText_->setText(" ");
+//    guessInput_->setText(" ");
+    submitBtn_->clicked().connect(this, &WordleGame::checkGuess);
 }
