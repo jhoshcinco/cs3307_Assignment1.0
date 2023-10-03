@@ -1,3 +1,8 @@
+/*
+ * WordleGame :simple wordle made using wt framework
+ * @author Jhoshcinco
+ * @version 10-02-2023
+ */
 #include <Wt/WApplication.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
@@ -23,7 +28,7 @@ private:
     Wt::WPushButton *submitBtn_;
     Wt::WText *statusText_;
 
-    void loadWordList(const std::string& filename);
+
     std::string randomSecretWord();
     void restartGame();
     void checkGuess();

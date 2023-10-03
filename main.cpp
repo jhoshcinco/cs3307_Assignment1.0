@@ -1,3 +1,8 @@
+/*
+ * WordleGame :simple wordle made using wt framework
+ * @author Jhoshcinco
+ * @version 10-02-2023
+ */
 #include "WordleGame.h"
 #include <Wt/WServer.h>
 
